@@ -40,22 +40,22 @@ interface Props {
 }
 
 const ACTION_BUTTONS: { id: ActionId; label: string; icon: any; cost: string; tone: string }[] = [
-  { id: "negotiate", label: "Negotiate", icon: Handshake, cost: "50$", tone: "blue" },
-  { id: "buildMilitary", label: "Build Military", icon: Sword, cost: "120$", tone: "amber" },
-  { id: "expandNuclear", label: "Expand Nuclear", icon: Radiation, cost: "200$", tone: "red" },
-  { id: "investEconomy", label: "Invest Economy", icon: TrendingUp, cost: "100$", tone: "green" },
-  { id: "spy", label: "Spy Op", icon: Eye, cost: "80$", tone: "purple" },
-  { id: "formAlliance", label: "Form Alliance", icon: HeartHandshake, cost: "150$", tone: "green" },
-  { id: "sanction", label: "Sanction", icon: ShieldAlert, cost: "—", tone: "red" },
+  { id: "negotiate", label: "Negocjuj", icon: Handshake, cost: "50$", tone: "blue" },
+  { id: "buildMilitary", label: "Rozbuduj armię", icon: Sword, cost: "120$", tone: "amber" },
+  { id: "expandNuclear", label: "Rozwiń atom", icon: Radiation, cost: "200$", tone: "red" },
+  { id: "investEconomy", label: "Inwestuj", icon: TrendingUp, cost: "100$", tone: "green" },
+  { id: "spy", label: "Szpieguj", icon: Eye, cost: "80$", tone: "purple" },
+  { id: "formAlliance", label: "Sojusz", icon: HeartHandshake, cost: "150$", tone: "green" },
+  { id: "sanction", label: "Sankcje", icon: ShieldAlert, cost: "—", tone: "red" },
 ];
 
 const TICKER_LINES = [
-  "MARKETS WATCH BERLIN SUMMIT • ",
-  "ARC LAUNCHES ORBITAL DEFENSE PLATFORM • ",
-  "USSAR FLEET MANEUVERS IN ARCTIC • ",
-  "EAC PARLIAMENT VOTES ON FUSION GRID • ",
-  "JAS DRONES INTERCEPT UNKNOWN SIGNAL • ",
-  "GLOBAL OIL DOWN 2.4% • CREDIT INDEX STABLE • ",
+  "RYNKI OBSERWUJĄ SZCZYT W BERLINIE • ",
+  "ARC WYSTRZELIWUJE ORBITALNĄ PLATFORMĘ OBRONNĄ • ",
+  "FLOTA USSAR PROWADZI MANEWRY W ARKTYCE • ",
+  "PARLAMENT EAC GŁOSUJE NAD SIECIĄ FUZYJNĄ • ",
+  "DRONY JAS PRZECHWYCIŁY NIEZNANY SYGNAŁ • ",
+  "GLOBALNA ROPA -2,4% • INDEKS KREDYTOWY STABILNY • ",
 ];
 
 export function GameScreen({ playerId, initial, onExit }: Props) {
@@ -84,7 +84,7 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
     update((d) => {
       const err = ACTIONS[id](d);
       if (err) {
-        toast({ title: "Action blocked", description: err, variant: "destructive" });
+          toast({ title: "Akcja zablokowana", description: err, variant: "destructive" });
       }
     });
   }
@@ -95,7 +95,7 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
       d.year += 1;
       simulateAITurn(d);
       endOfTurnDrift(d);
-      addLog(d, `Year ${d.year} begins.`, "info");
+        addLog(d, `Rozpoczyna się rok ${d.year}.`, "info");
     });
     // Trigger event ~55% chance
     if (Math.random() < 0.55) {
