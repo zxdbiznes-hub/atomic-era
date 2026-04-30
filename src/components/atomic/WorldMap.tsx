@@ -127,13 +127,13 @@ export function WorldMap({ playerId, selected, onSelect, tension, alliances }: P
 
       {/* Legend */}
       <div className="absolute bottom-2 left-2 panel px-3 py-2 text-xs space-y-1">
-        <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-neon-blue" /> Your nation</div>
-        <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-neon-green" /> Ally</div>
-        <div className="text-muted-foreground">Click a region for details</div>
+        <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-neon-blue" /> Twoje państwo</div>
+        <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-neon-green" /> Sojusznik</div>
+        <div className="text-muted-foreground">Kliknij region, aby zobaczyć szczegóły</div>
       </div>
 
       <div className="absolute top-2 right-2 panel px-3 py-1 text-xs text-muted-foreground tracking-widest">
-        WORLD GRID • LIVE
+        SIATKA ŚWIATA • LIVE
       </div>
     </div>
   );

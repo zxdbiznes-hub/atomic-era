@@ -67,7 +67,7 @@ export function createInitialState(playerId: FactionId): GameState {
       {
         id: "init",
         year: 2095,
-        text: `${player.name} assumes leadership. The world watches.`,
+        text: `${player.name} obejmuje przywództwo. Świat patrzy.`,
         tone: "info",
       },
     ],
@@ -85,50 +85,50 @@ export function addLog(s: GameState, text: string, tone: LogEntry["tone"] = "inf
 // Player actions
 export const ACTIONS = {
   negotiate: (s: GameState) => {
-    if (s.player.treasury < 50) return "Need 50 treasury";
+    if (s.player.treasury < 50) return "Potrzeba 50 skarbca";
     s.player.treasury -= 50;
     s.player.diplomacy = clamp(s.player.diplomacy + 6);
     s.globalTension = clamp(s.globalTension - 4);
     s.ai.forEach((a) => (a.relation = clamp(a.relation + 4, -100, 100)));
-    addLog(s, "Diplomatic channels opened. Tensions ease.", "good");
+    addLog(s, "Otwarto kanały dyplomatyczne. Napięcia maleją.", "good");
     return null;
   },
   buildMilitary: (s: GameState) => {
-    if (s.player.treasury < 120) return "Need 120 treasury";
+    if (s.player.treasury < 120) return "Potrzeba 120 skarbca";
     s.player.treasury -= 120;
     s.player.military = clamp(s.player.military + 5);
     s.globalTension = clamp(s.globalTension + 3);
-    addLog(s, "Military expansion authorized.", "info");
+    addLog(s, "Zatwierdzono rozbudowę wojska.", "info");
     return null;
   },
   expandNuclear: (s: GameState) => {
-    if (s.player.treasury < 200) return "Need 200 treasury";
+    if (s.player.treasury < 200) return "Potrzeba 200 skarbca";
     s.player.treasury -= 200;
     s.player.nuclear = clamp(s.player.nuclear + 6);
     s.globalTension = clamp(s.globalTension + 8);
     s.nuclearRisk = clamp(s.nuclearRisk + 5);
-    addLog(s, "Nuclear arsenal expanded. Global alarm rises.", "warn");
+    addLog(s, "Rozbudowano arsenał nuklearny. Światowy niepokój rośnie.", "warn");
     return null;
   },
   investEconomy: (s: GameState) => {
-    if (s.player.treasury < 100) return "Need 100 treasury";
+    if (s.player.treasury < 100) return "Potrzeba 100 skarbca";
     s.player.treasury -= 100;
     s.player.economy = clamp(s.player.economy + 5);
     s.player.stability = clamp(s.player.stability + 3);
-    addLog(s, "Capital injected into national industries.", "good");
+    addLog(s, "Zainwestowano kapitał w przemysł narodowy.", "good");
     return null;
   },
   spy: (s: GameState) => {
-    if (s.player.treasury < 80) return "Need 80 treasury";
+    if (s.player.treasury < 80) return "Potrzeba 80 skarbca";
     s.player.treasury -= 80;
     const target = s.ai[Math.floor(Math.random() * s.ai.length)];
     if (Math.random() < 0.65) {
       target.military = clamp(target.military - 4);
-      addLog(s, `Spy op against ${target.id} succeeded. Intel acquired.`, "good");
+      addLog(s, `Operacja szpiegowska przeciw ${target.id} udana. Zdobyto wywiad.`, "good");
     } else {
       target.relation = clamp(target.relation - 12, -100, 100);
       s.globalTension = clamp(s.globalTension + 6);
-      addLog(s, `Spy op against ${target.id} EXPOSED. Diplomatic fallout.`, "danger");
+      addLog(s, `Operacja szpiegowska przeciw ${target.id} ZDEMASKOWANA. Skutki dyplomatyczne.`, "danger");
     }
     return null;
   },
@@ -136,28 +136,28 @@ export const ACTIONS = {
     const candidate = s.ai
       .filter((a) => !a.alliance)
       .sort((a, b) => b.relation - a.relation)[0];
-    if (!candidate) return "No candidate";
-    if (candidate.relation < 30) return `${candidate.id} relations too low (${candidate.relation})`;
-    if (s.player.treasury < 150) return "Need 150 treasury";
+    if (!candidate) return "Brak kandydata";
+    if (candidate.relation < 30) return `Relacje z ${candidate.id} zbyt niskie (${candidate.relation})`;
+    if (s.player.treasury < 150) return "Potrzeba 150 skarbca";
     s.player.treasury -= 150;
     candidate.alliance = true;
     candidate.relation = clamp(candidate.relation + 20, -100, 100);
     s.player.diplomacy = clamp(s.player.diplomacy + 8);
     s.globalTension = clamp(s.globalTension - 6);
-    addLog(s, `Alliance signed with ${candidate.id}.`, "good");
+    addLog(s, `Podpisano sojusz z ${candidate.id}.`, "good");
     return null;
   },
   sanction: (s: GameState) => {
     const target = s.selectedNation
       ? s.ai.find((a) => a.id === s.selectedNation)
       : s.ai.sort((a, b) => a.relation - b.relation)[0];
-    if (!target) return "Select an AI nation";
-    if (target.alliance) return "Cannot sanction ally";
+    if (!target) return "Wybierz państwo SI";
+    if (target.alliance) return "Nie można nałożyć sankcji na sojusznika";
     target.sanctioned = true;
     target.economy = clamp(target.economy - 6);
     target.relation = clamp(target.relation - 15, -100, 100);
     s.globalTension = clamp(s.globalTension + 5);
-    addLog(s, `Sanctions imposed on ${target.id}.`, "warn");
+    addLog(s, `Nałożono sankcje na ${target.id}.`, "warn");
     return null;
   },
 };
@@ -173,17 +173,17 @@ export function simulateAITurn(s: GameState) {
       a.nuclear = clamp(a.nuclear + 3);
       s.globalTension = clamp(s.globalTension + 2);
       s.nuclearRisk = clamp(s.nuclearRisk + 2);
-      addLog(s, `${a.id} expands nuclear arsenal.`, "warn");
+      addLog(s, `${a.id} rozbudowuje arsenał nuklearny.`, "warn");
     } else if (roll < aggression * 0.7) {
       a.military = clamp(a.military + 3);
       s.globalTension = clamp(s.globalTension + 1);
-      addLog(s, `${a.id} mobilizes additional divisions.`, "info");
+      addLog(s, `${a.id} mobilizuje kolejne dywizje.`, "info");
     } else if (roll < 0.85) {
       a.economy = clamp(a.economy + 2);
     } else {
       a.relation = clamp(a.relation + 5, -100, 100);
       s.globalTension = clamp(s.globalTension - 1);
-      addLog(s, `${a.id} signals diplomatic openness.`, "good");
+      addLog(s, `${a.id} sygnalizuje otwartość dyplomatyczną.`, "good");
     }
     if (a.sanctioned && Math.random() < 0.4) {
       a.relation = clamp(a.relation - 4, -100, 100);
@@ -209,27 +209,27 @@ export function endOfTurnDrift(s: GameState) {
 export function checkEndState(s: GameState): GameState {
   if (s.nuclearRisk >= 100 || s.globalTension >= 100) {
     s.status = "lost";
-    s.endReason = "GLOBAL THERMONUCLEAR WAR — civilization collapses.";
+    s.endReason = "GLOBALNA WOJNA TERMOJĄDROWA — cywilizacja upada.";
     return s;
   }
   if (s.player.stability <= 0) {
     s.status = "lost";
-    s.endReason = "Internal collapse. Your government has fallen.";
+    s.endReason = "Wewnętrzny upadek. Twój rząd został obalony.";
     return s;
   }
   if (s.year >= 2150) {
     s.status = "won";
     s.endReason =
       s.nuclearRisk < 30
-        ? "VICTORY — You guided humanity past the nuclear age."
-        : "VICTORY — You survived to 2150 as a dominant power.";
+        ? "ZWYCIĘSTWO — Przeprowadziłeś ludzkość poza erę atomu."
+        : "ZWYCIĘSTWO — Przetrwałeś do 2150 jako dominująca potęga.";
     return s;
   }
   // Disarmament victory
   const allLowNuclear = s.player.nuclear < 20 && s.ai.every((a) => a.nuclear < 25);
   if (allLowNuclear && s.year > 2110) {
     s.status = "won";
-    s.endReason = "GLOBAL DISARMAMENT achieved. The atomic age ends.";
+    s.endReason = "Osiągnięto GLOBALNE ROZBROJENIE. Era atomu się kończy.";
     return s;
   }
   return s;

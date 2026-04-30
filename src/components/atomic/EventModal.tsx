@@ -13,7 +13,7 @@ export function EventModal({ event, onChoose }: Props) {
       <div className="panel-hud max-w-lg w-[92%] p-6 clip-corner space-y-4 animate-scale-in border-l-4 border-l-[hsl(var(--neon-amber))]">
         <div className="flex items-center gap-3 text-[hsl(var(--neon-amber))]">
           <AlertTriangle className="w-6 h-6 flash" />
-          <span className="display text-xs tracking-[0.4em] uppercase">Global Event</span>
+          <span className="display text-xs tracking-[0.4em] uppercase">Wydarzenie Globalne</span>
         </div>
         <h3 className="display text-2xl">{event.title}</h3>
         <p className="text-foreground/80">{event.body}</p>

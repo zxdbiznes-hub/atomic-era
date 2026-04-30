@@ -32,14 +32,14 @@ export function MainMenu({ onNewGame, hasSave, onLoad }: Props) {
         <div className="text-center space-y-3">
           <div className="flex items-center justify-center gap-3 text-neon-red">
             <Atom className="w-8 h-8 pulse-ring rounded-full" />
-            <span className="text-xs tracking-[0.5em] uppercase text-muted-foreground">2095 — Crisis Protocol</span>
+            <span className="text-xs tracking-[0.5em] uppercase text-muted-foreground">2095 — Protokół Kryzysu</span>
             <Atom className="w-8 h-8" />
           </div>
           <h1 className="display text-7xl md:text-8xl font-black tracking-widest text-glow-blue">
             ATOMIC <span className="text-neon-red text-glow-red">FALL</span>
           </h1>
           <p className="text-muted-foreground max-w-md mx-auto">
-            Lead a superpower. Avoid annihilation. Shape the last century of human civilization.
+            Poprowadź supermocarstwo. Unikaj zagłady. Kształtuj ostatni wiek ludzkiej cywilizacji.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export function MainMenu({ onNewGame, hasSave, onLoad }: Props) {
             onClick={onNewGame}
             className="h-12 text-base bg-neon-blue text-primary-foreground hover:bg-neon-blue/80 glow-blue clip-corner display tracking-widest"
           >
-            NEW GAME
+            NOWA GRA
           </Button>
           <Button
             onClick={onLoad}
@@ -56,19 +56,19 @@ export function MainMenu({ onNewGame, hasSave, onLoad }: Props) {
             variant="outline"
             className="h-12 border-border bg-card/60 hover:bg-card display tracking-widest clip-corner"
           >
-            LOAD GAME
+            WCZYTAJ GRĘ
           </Button>
           <Button
             variant="ghost"
             className="h-12 text-muted-foreground hover:text-foreground display tracking-widest"
-            onClick={() => alert("Settings — coming soon. Audio: ON • Difficulty: NORMAL")}
+            onClick={() => alert("Ustawienia — wkrótce. Dźwięk: WŁ • Trudność: NORMALNA")}
           >
-            SETTINGS
+            USTAWIENIA
           </Button>
         </div>
 
         <div className="absolute bottom-6 left-0 right-0 text-center text-xs text-muted-foreground tracking-widest">
-          v0.1 PROTOTYPE • BUILD 2095.04
+          v0.1 PROTOTYP • BUILD 2095.04
         </div>
       </div>
     </div>
