@@ -8,33 +8,40 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Atomic Fall — dark futuristic strategy theme */
+    --background: 222 47% 5%;
+    --foreground: 210 40% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 222 40% 8%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 222 45% 7%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 195 100% 55%;
+    --primary-foreground: 222 47% 5%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 222 25% 12%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 142 76% 50%;
+    --accent-foreground: 222 47% 5%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 90% 58%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 222 30% 18%;
+    --input: 222 30% 16%;
+    --ring: 195 100% 55%;
+
+    --neon-red: 0 95% 60%;
+    --neon-blue: 195 100% 55%;
+    --neon-green: 142 76% 50%;
+    --neon-amber: 38 100% 55%;
+    --neon-purple: 280 90% 65%;
 
     --radius: 0.5rem;
 
@@ -101,5 +108,88 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Rajdhani', 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(ellipse at top, hsl(195 100% 15% / 0.15), transparent 60%),
+      radial-gradient(ellipse at bottom, hsl(0 90% 25% / 0.12), transparent 60%);
+    background-attachment: fixed;
   }
+
+  h1, h2, h3, h4, .display {
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    letter-spacing: 0.04em;
+  }
+}
+
+@layer utilities {
+  .text-neon-red { color: hsl(var(--neon-red)); }
+  .text-neon-blue { color: hsl(var(--neon-blue)); }
+  .text-neon-green { color: hsl(var(--neon-green)); }
+  .text-neon-amber { color: hsl(var(--neon-amber)); }
+  .text-neon-purple { color: hsl(var(--neon-purple)); }
+
+  .bg-neon-red { background-color: hsl(var(--neon-red)); }
+  .bg-neon-blue { background-color: hsl(var(--neon-blue)); }
+  .bg-neon-green { background-color: hsl(var(--neon-green)); }
+
+  .glow-blue { box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.5), inset 0 0 20px hsl(var(--neon-blue) / 0.05); }
+  .glow-red { box-shadow: 0 0 20px hsl(var(--neon-red) / 0.5), inset 0 0 20px hsl(var(--neon-red) / 0.05); }
+  .glow-green { box-shadow: 0 0 20px hsl(var(--neon-green) / 0.5), inset 0 0 20px hsl(var(--neon-green) / 0.05); }
+
+  .text-glow-blue { text-shadow: 0 0 10px hsl(var(--neon-blue) / 0.8); }
+  .text-glow-red { text-shadow: 0 0 10px hsl(var(--neon-red) / 0.8); }
+  .text-glow-green { text-shadow: 0 0 10px hsl(var(--neon-green) / 0.8); }
+
+  .panel {
+    @apply bg-card/80 backdrop-blur border border-border rounded-md;
+    background-image: linear-gradient(hsl(var(--card) / 0.9), hsl(var(--card) / 0.7));
+  }
+
+  .panel-hud {
+    @apply panel;
+    box-shadow: 0 0 0 1px hsl(var(--neon-blue) / 0.15), 0 4px 30px hsl(0 0% 0% / 0.4);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--neon-blue) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--neon-blue) / 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent 0, transparent 2px, hsl(var(--neon-blue) / 0.03) 2px, hsl(var(--neon-blue) / 0.03) 3px);
+    pointer-events: none;
+  }
+
+  .clip-corner {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--neon-red) / 0.6); }
+    50% { box-shadow: 0 0 0 12px hsl(var(--neon-red) / 0); }
+  }
+  .pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+
+  @keyframes ticker {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  .ticker { animation: ticker 45s linear infinite; }
+
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .flash { animation: flash 1s ease-in-out infinite; }
+
+  @keyframes globe-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .globe-spin { animation: globe-spin 60s linear infinite; }
 }
