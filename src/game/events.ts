@@ -19,21 +19,21 @@ const clamp = (n: number, min = 0, max = 100) => Math.max(min, Math.min(max, n))
 export const EVENTS: GameEvent[] = [
   {
     id: "ussar_hbomb",
-    title: "USSAR Tests New Hydrogen Bomb",
-    body: "Seismic sensors confirm a 50-megaton detonation in the Arctic. The world demands a response.",
+    title: "USSAR testuje nową bombę wodorową",
+    body: "Czujniki sejsmiczne potwierdzają detonację 50 megaton w Arktyce. Świat domaga się odpowiedzi.",
     weight: 10,
     choices: [
       {
-        label: "Condemn publicly",
-        description: "+5 Diplomacy, +8 Global Tension",
+        label: "Potępij publicznie",
+        description: "+5 Dyplomacja, +8 Napięcie",
         apply: (s) => {
           s.player.diplomacy = clamp(s.player.diplomacy + 5);
           s.globalTension = clamp(s.globalTension + 8);
         },
       },
       {
-        label: "Match their arsenal",
-        description: "+8 Nuclear, +12 Tension, -150 Treasury",
+        label: "Dorównaj ich arsenałowi",
+        description: "+8 Atom, +12 Napięcie, -150 Skarbiec",
         apply: (s) => {
           s.player.nuclear = clamp(s.player.nuclear + 8);
           s.globalTension = clamp(s.globalTension + 12);
@@ -41,8 +41,8 @@ export const EVENTS: GameEvent[] = [
         },
       },
       {
-        label: "Stay silent",
-        description: "-4 Stability",
+        label: "Zachowaj milczenie",
+        description: "-4 Stabilność",
         apply: (s) => {
           s.player.stability = clamp(s.player.stability - 4);
         },
@@ -51,21 +51,21 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "uranium_china",
-    title: "ARC Discovers Vast Uranium Deposits",
-    body: "Massive uranium reserves found in the Gobi. Global markets shift overnight.",
+    title: "ARC odkrywa ogromne złoża uranu",
+    body: "Olbrzymie rezerwy uranu znalezione na pustyni Gobi. Globalne rynki zmieniają się z dnia na dzień.",
     weight: 8,
     choices: [
       {
-        label: "Negotiate trade deal",
-        description: "+200 Treasury, +5 Diplomacy",
+        label: "Negocjuj umowę handlową",
+        description: "+200 Skarbiec, +5 Dyplomacja",
         apply: (s) => {
           s.player.treasury += 200;
           s.player.diplomacy = clamp(s.player.diplomacy + 5);
         },
       },
       {
-        label: "Sabotage operation",
-        description: "Risky: -8 Diplomacy, +6 Tension, +5 Nuclear edge",
+        label: "Operacja sabotażowa",
+        description: "Ryzyko: -8 Dyplomacja, +6 Napięcie, +5 Przewaga nuklearna",
         apply: (s) => {
           s.player.diplomacy = clamp(s.player.diplomacy - 8);
           s.globalTension = clamp(s.globalTension + 6);
@@ -76,13 +76,13 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "eu_protests",
-    title: "European Mass Protests",
-    body: "Millions march across the EAC demanding global disarmament.",
+    title: "Masowe protesty w Europie",
+    body: "Miliony ludzi maszerują w EAC, żądając globalnego rozbrojenia.",
     weight: 7,
     choices: [
       {
-        label: "Support disarmament talks",
-        description: "-10 Tension, -5 Nuclear",
+        label: "Wesprzyj rozmowy rozbrojeniowe",
+        description: "-10 Napięcie, -5 Atom",
         apply: (s) => {
           s.globalTension = clamp(s.globalTension - 10);
           s.player.nuclear = clamp(s.player.nuclear - 5);
@@ -90,29 +90,29 @@ export const EVENTS: GameEvent[] = [
         },
       },
       {
-        label: "Ignore",
-        description: "No effect",
+        label: "Zignoruj",
+        description: "Bez efektu",
         apply: () => {},
       },
     ],
   },
   {
     id: "cyber_attack",
-    title: "Cyber Attack on Military Network",
-    body: "An unknown actor breached your defense grid. Damage assessment underway.",
+    title: "Cyberatak na sieć wojskową",
+    body: "Nieznany sprawca włamał się do twojej sieci obronnej. Trwa ocena strat.",
     weight: 9,
     choices: [
       {
-        label: "Invest in cyber defense",
-        description: "-100 Treasury, +6 Stability",
+        label: "Zainwestuj w cyberobronę",
+        description: "-100 Skarbiec, +6 Stabilność",
         apply: (s) => {
           s.player.treasury -= 100;
           s.player.stability = clamp(s.player.stability + 6);
         },
       },
       {
-        label: "Retaliate digitally",
-        description: "+10 Tension, +4 Military",
+        label: "Cyfrowy odwet",
+        description: "+10 Napięcie, +4 Wojsko",
         apply: (s) => {
           s.globalTension = clamp(s.globalTension + 10);
           s.player.military = clamp(s.player.military + 4);
@@ -122,13 +122,13 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "border_conflict",
-    title: "Border Conflict Escalates",
-    body: "Skirmishes erupt along a contested border. Casualties reported on both sides.",
+    title: "Konflikt graniczny eskaluje",
+    body: "Wybuchają potyczki na spornej granicy. Po obu stronach są ofiary.",
     weight: 8,
     choices: [
       {
-        label: "Deploy troops",
-        description: "+6 Military, +10 Tension, -80 Treasury",
+        label: "Wyślij wojska",
+        description: "+6 Wojsko, +10 Napięcie, -80 Skarbiec",
         apply: (s) => {
           s.player.military = clamp(s.player.military + 6);
           s.globalTension = clamp(s.globalTension + 10);
@@ -136,8 +136,8 @@ export const EVENTS: GameEvent[] = [
         },
       },
       {
-        label: "Open negotiations",
-        description: "-6 Tension, +6 Diplomacy",
+        label: "Rozpocznij negocjacje",
+        description: "-6 Napięcie, +6 Dyplomacja",
         apply: (s) => {
           s.globalTension = clamp(s.globalTension - 6);
           s.player.diplomacy = clamp(s.player.diplomacy + 6);
@@ -147,13 +147,13 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "peace_summit",
-    title: "Peace Summit Convened",
-    body: "Global leaders gather in Geneva. The world holds its breath.",
+    title: "Zwołano szczyt pokojowy",
+    body: "Światowi przywódcy zbierają się w Genewie. Świat wstrzymuje oddech.",
     weight: 6,
     choices: [
       {
-        label: "Champion the summit",
-        description: "-15 Tension, -10 Risk, +10 Diplomacy",
+        label: "Stań na czele szczytu",
+        description: "-15 Napięcie, -10 Ryzyko, +10 Dyplomacja",
         apply: (s) => {
           s.globalTension = clamp(s.globalTension - 15);
           s.nuclearRisk = clamp(s.nuclearRisk - 10);
@@ -161,8 +161,8 @@ export const EVENTS: GameEvent[] = [
         },
       },
       {
-        label: "Boycott",
-        description: "+5 Tension, -5 Diplomacy",
+        label: "Bojkotuj",
+        description: "+5 Napięcie, -5 Dyplomacja",
         apply: (s) => {
           s.globalTension = clamp(s.globalTension + 5);
           s.player.diplomacy = clamp(s.player.diplomacy - 5);
@@ -172,13 +172,13 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "economic_boom",
-    title: "Global Economic Boom",
-    body: "AI-driven productivity surges. Markets reach all-time highs.",
+    title: "Globalny boom gospodarczy",
+    body: "Wydajność napędzana przez SI gwałtownie rośnie. Rynki biją historyczne rekordy.",
     weight: 6,
     choices: [
       {
-        label: "Cash in",
-        description: "+300 Treasury, +5 Stability",
+        label: "Zarób na tym",
+        description: "+300 Skarbiec, +5 Stabilność",
         apply: (s) => {
           s.player.treasury += 300;
           s.player.stability = clamp(s.player.stability + 5);
@@ -189,21 +189,21 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "rogue_state",
-    title: "Rogue State Acquires Warhead",
-    body: "Intelligence confirms a non-aligned state has stolen a tactical nuke.",
+    title: "Państwo zbójeckie zdobywa głowicę",
+    body: "Wywiad potwierdza, że niezrzeszone państwo ukradło taktyczny ładunek jądrowy.",
     weight: 7,
     choices: [
       {
-        label: "Joint strike team",
-        description: "-7 Risk, -120 Treasury",
+        label: "Wspólna grupa uderzeniowa",
+        description: "-7 Ryzyko, -120 Skarbiec",
         apply: (s) => {
           s.nuclearRisk = clamp(s.nuclearRisk - 7);
           s.player.treasury -= 120;
         },
       },
       {
-        label: "Do nothing",
-        description: "+12 Risk",
+        label: "Nie rób nic",
+        description: "+12 Ryzyko",
         apply: (s) => {
           s.nuclearRisk = clamp(s.nuclearRisk + 12);
         },
@@ -212,21 +212,21 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: "fusion_breakthrough",
-    title: "Fusion Breakthrough",
-    body: "Your scientists achieve sustained net-positive fusion.",
+    title: "Przełom w fuzji jądrowej",
+    body: "Twoi naukowcy osiągają stabilną, dodatnią energetycznie reakcję fuzji.",
     weight: 5,
     choices: [
       {
-        label: "Industrialize",
-        description: "+10 Economy, +200 Treasury",
+        label: "Uprzemysłowij",
+        description: "+10 Gospodarka, +200 Skarbiec",
         apply: (s) => {
           s.player.economy = clamp(s.player.economy + 10);
           s.player.treasury += 200;
         },
       },
       {
-        label: "Share with allies",
-        description: "+12 Diplomacy, -8 Tension",
+        label: "Podziel się z sojusznikami",
+        description: "+12 Dyplomacja, -8 Napięcie",
         apply: (s) => {
           s.player.diplomacy = clamp(s.player.diplomacy + 12);
           s.globalTension = clamp(s.globalTension - 8);
