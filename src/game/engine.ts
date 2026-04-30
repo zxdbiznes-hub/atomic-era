@@ -34,6 +34,8 @@ export interface LogEntry {
 
 export interface GameState {
   year: number;
+  /** save schema version */
+  version?: number;
   globalTension: number;
   worldEconomy: number;
   nuclearRisk: number;
@@ -62,6 +64,7 @@ export function createInitialState(playerId: FactionId): GameState {
   const player = getFaction(playerId);
   return {
     year: 2095,
+    version: 2,
     globalTension: 55,
     worldEconomy: 70,
     nuclearRisk: 35,

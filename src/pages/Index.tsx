@@ -31,6 +31,12 @@ const Index = () => {
               const raw = localStorage.getItem("atomicfall:save");
               if (!raw) return;
               const state: GameState = JSON.parse(raw);
+              if (!state.version || state.version < 2 || !state.regions || !state.research || !state.wars) {
+                localStorage.removeItem("atomicfall:save");
+                setHasSave(false);
+                alert("Stary zapis jest niekompatybilny z nową wersją (Atomic Fall ULTRA). Rozpocznij nową grę.");
+                return;
+              }
               setPlayerId(state.playerId);
               setSavedState(state);
               setScreen("game");
