@@ -134,15 +134,15 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
           <span className="display tracking-widest font-bold">ATOMIC FALL</span>
         </div>
         <div className="h-6 w-px bg-border" />
-        <Stat icon={Timer} label="YEAR" value={`${s.year}`} tone="blue" />
-        <Stat icon={ShieldAlert} label="TENSION" value={`${s.globalTension}%`} tone={s.globalTension > 70 ? "red" : "amber"} />
-        <Stat icon={TrendingUp} label="WORLD ECON" value={`${s.worldEconomy}%`} tone="green" />
-        <Stat icon={Radiation} label="NUCLEAR RISK" value={`${s.nuclearRisk}%`} tone={s.nuclearRisk > 70 ? "red" : "amber"} flash={s.nuclearRisk > 80} />
+        <Stat icon={Timer} label="ROK" value={`${s.year}`} tone="blue" />
+        <Stat icon={ShieldAlert} label="NAPIĘCIE" value={`${s.globalTension}%`} tone={s.globalTension > 70 ? "red" : "amber"} />
+        <Stat icon={TrendingUp} label="GOSP. ŚWIAT." value={`${s.worldEconomy}%`} tone="green" />
+        <Stat icon={Radiation} label="RYZYKO ATOM." value={`${s.nuclearRisk}%`} tone={s.nuclearRisk > 70 ? "red" : "amber"} flash={s.nuclearRisk > 80} />
         <div className="ml-auto flex items-center gap-2">
           <span className="text-xs text-muted-foreground display tracking-widest">{player.short}</span>
           <span className="w-3 h-3 rounded-full" style={{ background: `hsl(${player.color})`, boxShadow: `0 0 8px hsl(${player.color})` }} />
           <Button variant="ghost" size="sm" onClick={() => onExit(s)} className="display tracking-widest">
-            <X className="w-4 h-4 mr-1" /> EXIT
+            <X className="w-4 h-4 mr-1" /> WYJDŹ
           </Button>
         </div>
       </header>
@@ -182,23 +182,23 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
                   </button>
                 </div>
                 {selectedMeta.id === s.playerId ? (
-                  <div className="text-sm text-neon-blue display">YOUR NATION</div>
+                  <div className="text-sm text-neon-blue display">TWOJE PAŃSTWO</div>
                 ) : selectedNation ? (
                   <div className="space-y-2">
-                    <StatBar label="Stability" value={selectedNation.stability} tone="green" />
-                    <StatBar label="Economy" value={selectedNation.economy} tone="blue" />
-                    <StatBar label="Nuclear" value={selectedNation.nuclear} tone="red" />
-                    <StatBar label="Military" value={selectedNation.military} tone="amber" />
+                    <StatBar label="Stabilność" value={selectedNation.stability} tone="green" />
+                    <StatBar label="Gospodarka" value={selectedNation.economy} tone="blue" />
+                    <StatBar label="Atom" value={selectedNation.nuclear} tone="red" />
+                    <StatBar label="Wojsko" value={selectedNation.military} tone="amber" />
                     <div className="flex justify-between text-xs pt-1">
-                      <span className="text-muted-foreground">Relation</span>
+                      <span className="text-muted-foreground">Relacje</span>
                       <span className={selectedNation.relation >= 0 ? "text-neon-green" : "text-neon-red"}>
                         {selectedNation.relation > 0 ? "+" : ""}{selectedNation.relation}
                       </span>
                     </div>
                     <div className="flex gap-1 pt-1">
-                      {selectedNation.alliance && <span className="text-[10px] px-2 py-0.5 bg-neon-green/20 text-neon-green rounded display tracking-widest">ALLY</span>}
-                      {selectedNation.sanctioned && <span className="text-[10px] px-2 py-0.5 bg-neon-red/20 text-neon-red rounded display tracking-widest">SANCTIONED</span>}
-                      {selectedNation.relation < -50 && <span className="text-[10px] px-2 py-0.5 bg-neon-red/20 text-neon-red rounded display tracking-widest">HOSTILE</span>}
+                      {selectedNation.alliance && <span className="text-[10px] px-2 py-0.5 bg-neon-green/20 text-neon-green rounded display tracking-widest">SOJUSZNIK</span>}
+                      {selectedNation.sanctioned && <span className="text-[10px] px-2 py-0.5 bg-neon-red/20 text-neon-red rounded display tracking-widest">SANKCJE</span>}
+                      {selectedNation.relation < -50 && <span className="text-[10px] px-2 py-0.5 bg-neon-red/20 text-neon-red rounded display tracking-widest">WROGI</span>}
                     </div>
                   </div>
                 ) : null}
@@ -229,7 +229,7 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
                 className="h-auto flex-col gap-1 py-2 col-span-2 sm:col-span-4 lg:col-span-1 bg-neon-red hover:bg-neon-red/85 text-white glow-red display tracking-widest"
               >
                 <Timer className="w-5 h-5" />
-                <span className="text-xs font-bold">END TURN</span>
+                <span className="text-xs font-bold">KONIEC TURY</span>
               </Button>
             </div>
           </div>
@@ -238,25 +238,25 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
         {/* Right panel */}
         <aside className="panel-hud p-4 clip-corner flex flex-col gap-3 overflow-hidden">
           <div>
-            <div className="text-xs text-muted-foreground display tracking-widest">COMMAND</div>
+            <div className="text-xs text-muted-foreground display tracking-widest">DOWÓDZTWO</div>
             <div className="display text-xl">{player.name}</div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <KV icon={Banknote} label="Treasury" value={`${s.player.treasury}B$`} tone="blue" />
-            <KV icon={Users} label="Population" value={`${s.player.population}M`} tone="green" />
+            <KV icon={Banknote} label="Skarbiec" value={`${s.player.treasury} mld$`} tone="blue" />
+            <KV icon={Users} label="Populacja" value={`${s.player.population} mln`} tone="green" />
           </div>
 
           <div className="space-y-2">
-            <StatBar label="Stability" value={s.player.stability} tone="green" />
-            <StatBar label="Economy" value={s.player.economy} tone="blue" />
-            <StatBar label="Army Strength" value={s.player.military} tone="amber" />
-            <StatBar label="Nuclear Warheads" value={s.player.nuclear} tone="red" />
-            <StatBar label="Diplomacy" value={s.player.diplomacy} tone="green" />
+            <StatBar label="Stabilność" value={s.player.stability} tone="green" />
+            <StatBar label="Gospodarka" value={s.player.economy} tone="blue" />
+            <StatBar label="Siła armii" value={s.player.military} tone="amber" />
+            <StatBar label="Głowice nuklearne" value={s.player.nuclear} tone="red" />
+            <StatBar label="Dyplomacja" value={s.player.diplomacy} tone="green" />
           </div>
 
           <div className="border-t border-border pt-2 flex-1 min-h-0 flex flex-col">
-            <div className="text-xs text-muted-foreground display tracking-widest mb-1">EVENT LOG</div>
+            <div className="text-xs text-muted-foreground display tracking-widest mb-1">DZIENNIK ZDARZEŃ</div>
             <div className="flex-1 overflow-y-auto space-y-1 pr-1 text-xs">
               {s.log.map((l) => (
                 <div
@@ -288,12 +288,12 @@ export function GameScreen({ playerId, initial, onExit }: Props) {
           <div className="panel-hud p-10 max-w-md text-center clip-corner space-y-4 border-l-4"
                style={{ borderLeftColor: s.status === "won" ? "hsl(var(--neon-green))" : "hsl(var(--neon-red))" }}>
             <div className={`display text-5xl ${s.status === "won" ? "text-neon-green text-glow-green" : "text-neon-red text-glow-red"}`}>
-              {s.status === "won" ? "VICTORY" : "DEFEAT"}
+              {s.status === "won" ? "ZWYCIĘSTWO" : "PORAŻKA"}
             </div>
             <p className="text-foreground/80">{s.endReason}</p>
-            <div className="text-xs text-muted-foreground">Final year: {s.year}</div>
+            <div className="text-xs text-muted-foreground">Ostatni rok: {s.year}</div>
             <Button onClick={() => onExit(s)} className="bg-neon-blue text-primary-foreground display tracking-widest glow-blue">
-              RETURN TO MENU
+              POWRÓT DO MENU
             </Button>
           </div>
         </div>
